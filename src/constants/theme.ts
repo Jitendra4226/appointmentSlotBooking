@@ -2,13 +2,20 @@ export const colors = {
   primary: '#2563EB',
   primaryDark: '#1D4ED8',
   primaryLight: '#DBEAFE',
+  primarySoft: '#EFF6FF',
   background: '#F8FAFC',
   surface: '#FFFFFF',
+  mutedSurface: '#F1F5F9',
   border: '#E2E8F0',
+  success: '#15803D',
+  successLight: '#DCFCE7',
+  danger: '#DC2626',
+  dangerLight: '#FEE2E2',
   textPrimary: '#0F172A',
   textSecondary: '#334155',
   textTertiary: '#475569',
   textMuted: '#64748B',
+  textOnPrimary: '#FFFFFF',
 } as const;
 
 export const spacing = {
