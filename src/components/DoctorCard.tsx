@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   colors,
   fontSize,
@@ -11,6 +11,8 @@ import type { Doctor } from '../types';
 
 interface DoctorCardProps {
   doctor: Doctor;
+  isSelected?: boolean;
+  onPress?: () => void;
 }
 
 const AVATAR_SIZE = 52;
@@ -22,13 +24,23 @@ const getDoctorInitials = (doctorName: string): string => {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`;
 };
 
-const DoctorCard = ({ doctor }: DoctorCardProps) => {
+const DoctorCard = ({
+  doctor,
+  isSelected = false,
+  onPress,
+}: DoctorCardProps) => {
   const { name, specialization, experienceYears } = doctor;
   const initials = getDoctorInitials(name);
   const experienceText = `${experienceYears} years experience`;
 
   return (
-    <View style={styles.card}>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityState={{ selected: isSelected }}
+      disabled={!onPress}
+      onPress={onPress}
+      style={[styles.card, isSelected && styles.selectedCard]}
+    >
       <View style={styles.avatar}>
         <Text style={styles.avatarText}>{initials}</Text>
       </View>
@@ -38,7 +50,7 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
         <Text style={styles.specialization}>{specialization}</Text>
         <Text style={styles.experience}>{experienceText}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -51,6 +63,10 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  selectedCard: {
+    backgroundColor: colors.primarySoft,
+    borderColor: colors.primary,
   },
   avatar: {
     width: AVATAR_SIZE,
