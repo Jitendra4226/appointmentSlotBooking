@@ -1,11 +1,15 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import BookingScreen from './src/screens/BookingScreen';
+import { Provider } from 'react-redux';
+import { store } from './src/app/store';
+import AppNavigator from './src/navigation/AppNavigator';
 
 const App = () => (
-  <SafeAreaProvider>
-    <BookingScreen />
-  </SafeAreaProvider>
+  <Provider store={store}>
+    <SafeAreaProvider>
+      <AppNavigator />
+    </SafeAreaProvider>
+  </Provider>
 );
 
 export default App;
